@@ -11,7 +11,7 @@ Interfaz de chat con estética retro CRT/punk terminal para interactuar con mode
 
 ```bash
 # Clonar e instalar
-git clone <url>
+git clone https://github.com/XAnthekiraX/OllamaChat
 cd OllamaChat
 npm install
 
@@ -26,12 +26,12 @@ La app se abre en `http://localhost:5173`.
 
 ## Comandos
 
-| Comando | Descripción |
-|---------|-------------|
-| `npm run dev` | Servidor de desarrollo (puerto 5173) |
-| `npm run build` | Typecheck + bundle de producción |
-| `npm run lint` | Linting con oxlint |
-| `npm run preview` | Vista previa de producción |
+| Comando           | Descripción                          |
+| ----------------- | ------------------------------------ |
+| `npm run dev`     | Servidor de desarrollo (puerto 5173) |
+| `npm run build`   | Typecheck + bundle de producción     |
+| `npm run lint`    | Linting con oxlint                   |
+| `npm run preview` | Vista previa de producción           |
 
 ## Características
 
@@ -46,15 +46,15 @@ La app se abre en `http://localhost:5173`.
 
 ## Stack
 
-| Tecnología | Propósito |
-|------------|-----------|
-| React 19 | UI framework |
-| TypeScript 6 | Tipado estático |
-| Vite 8 | Build tool y dev server |
-| Tailwind CSS 4 | Estilos utilitarios |
-| react-markdown + remark-gfm | Renderizado de markdown |
-| @iconify/react | Iconos (colección lineicons) |
-| oxlint | Linting |
+| Tecnología                  | Propósito                    |
+| --------------------------- | ---------------------------- |
+| React 19                    | UI framework                 |
+| TypeScript 6                | Tipado estático              |
+| Vite 8                      | Build tool y dev server      |
+| Tailwind CSS 4              | Estilos utilitarios          |
+| react-markdown + remark-gfm | Renderizado de markdown      |
+| @iconify/react              | Iconos (colección lineicons) |
+| oxlint                      | Linting                      |
 
 ## Estructura
 
