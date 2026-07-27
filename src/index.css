@@ -1,0 +1,320 @@
+@import "tailwindcss";
+
+/* ── Theme Variables ─────────────────────────────────── */
+
+:root {
+  color-scheme: dark;
+
+  /* Dark Mode (Default) — "Medianoche de Neón" */
+  --color-bg-primary: #0a0a0a;
+  --color-bg-secondary: #111111;
+  --color-bg-tertiary: #1a1a1a;
+  --color-red-neon: #ff2020;
+  --color-red-dim: #cc0000;
+  --color-red-glow: rgba(255, 32, 32, 0.15);
+  --color-text-primary: #f0f0f0;
+  --color-text-secondary: #b0b0b0;
+  --color-text-muted: #606060;
+  --color-border: #222222;
+  --color-border-neon: #ff2020;
+  --color-surface: #181818;
+}
+
+.light {
+  color-scheme: light;
+
+  /* Light Mode — "Azul Eléctrico" */
+  --color-bg-primary: #f0f4f8;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #e2e8f0;
+  --color-red-neon: #2563eb;
+  --color-red-dim: #1d4ed8;
+  --color-red-glow: rgba(37, 99, 235, 0.12);
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #6b6b6b;
+  --color-border: #cbd5e1;
+  --color-border-neon: #2563eb;
+  --color-surface: #ffffff;
+}
+
+/* ── Base Styles ─────────────────────────────────────── */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-red-dim) transparent;
+}
+
+body {
+  font-family: "VT323", monospace;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  margin: 0;
+  overflow: hidden;
+}
+
+/* ── CRT Scanline Overlay ────────────────────────────── */
+
+.scanlines::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+}
+
+.light .scanlines::before {
+  display: none;
+}
+
+/* ── Font Classes ────────────────────────────────────── */
+
+.font-pixel {
+  font-family: "Press Start 2P", monospace;
+  letter-spacing: 0.02em;
+}
+
+.font-terminal {
+  font-family: "VT323", monospace;
+}
+
+.font-mono-code {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* ── Animations ──────────────────────────────────────── */
+
+@keyframes neon-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 5px var(--color-red-glow), 0 0 10px var(--color-red-glow);
+  }
+  50% {
+    box-shadow: 0 0 15px var(--color-red-glow), 0 0 30px var(--color-red-glow);
+  }
+}
+
+@keyframes glitch-scan {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1px);
+  }
+}
+
+@keyframes fade-in-up-clip {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes typing-dot {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes welcome-glitch {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  20% {
+    opacity: 1;
+    clip-path: inset(0 0% 0 0);
+  }
+  40% {
+    clip-path: inset(20% 0 80% 0);
+  }
+  45% {
+    clip-path: inset(40% 0 60% 0);
+  }
+  50% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.animate-neon-pulse {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+.animate-glitch-scan {
+  animation: glitch-scan 0.3s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up-clip 0.35s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 1s linear infinite;
+}
+
+.typing-dot {
+  animation: typing-dot 1.4s ease-in-out infinite;
+}
+
+.typing-dot-1 { animation-delay: 0s; }
+.typing-dot-2 { animation-delay: 0.2s; }
+.typing-dot-3 { animation-delay: 0.4s; }
+
+/* ── Torn Paper Edge Effects ─────────────────────────── */
+
+.torn-edge-right {
+  clip-path: polygon(
+    0% 0%,
+    100% 2%,
+    98% 4%,
+    100% 8%,
+    97% 12%,
+    100% 16%,
+    98% 20%,
+    100% 24%,
+    97% 28%,
+    100% 32%,
+    98% 36%,
+    100% 40%,
+    97% 44%,
+    100% 48%,
+    98% 52%,
+    100% 56%,
+    97% 60%,
+    100% 64%,
+    98% 68%,
+    100% 72%,
+    97% 76%,
+    100% 80%,
+    98% 84%,
+    100% 88%,
+    97% 92%,
+    100% 96%,
+    98% 98%,
+    100% 100%,
+    0% 100%
+  );
+}
+
+.torn-edge-left {
+  clip-path: polygon(
+    0% 2%,
+    3% 0%,
+    100% 0%,
+    100% 100%,
+    3% 100%,
+    0% 98%,
+    2% 94%,
+    0% 90%,
+    3% 86%,
+    0% 82%,
+    2% 78%,
+    0% 74%,
+    3% 70%,
+    0% 66%,
+    2% 62%,
+    0% 58%,
+    3% 54%,
+    0% 50%,
+    2% 46%,
+    0% 42%,
+    3% 38%,
+    0% 34%,
+    2% 30%,
+    0% 26%,
+    3% 22%,
+    0% 18%,
+    2% 14%,
+    0% 10%,
+    3% 6%,
+    0% 2%
+  );
+}
+
+/* ── Hard Shadow Utility ─────────────────────────────── */
+
+.shadow-hard {
+  box-shadow: 3px 3px 0 var(--color-text-muted);
+}
+
+.shadow-hard-red {
+  box-shadow: 3px 3px 0 var(--color-red-dim);
+}
+
+/* ── Custom Scrollbar ────────────────────────────────── */
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-red-dim);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-red-neon);
+}
+
+/* ── Focus Ring ──────────────────────────────────────── */
+
+.focus-ring-neon:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-red-neon), 0 0 8px var(--color-red-glow);
+}
+
+/* ── Google Fonts Fallback ───────────────────────────── */
+
+@supports (font-variation-settings: normal) {
+  .font-mono-code {
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+  }
+}
